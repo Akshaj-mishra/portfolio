@@ -61,26 +61,26 @@ export const personalData = {
   projects: [
     {
       title: "Plantvillage",
-      description: "Developed a conversational AI chatbot using local LLMs and Gemini APIs, capable of understanding natural language and providing intelligent responses.",
-      githubLink: "https://github.com/johndoe/ai-chatbot",
+      description: "PlantVillage is an open-access platform designed to help farmers identify crop diseases and improve agricultural productivity using AI-powered tools. It combines research, machine learning, and a vast image database to provide quick, accurate diagnoses of plant health issues. By offering practical, data-driven guidance, PlantVillage supports sustainable farming and helps communities increase food security.",
+      githubLink: "https://github.com/Akshaj-mishra/plantVillage.git",
       imageUrl: ""
     },
     {
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce application built with MERN stack, featuring user authentication, product catalog, shopping cart, and secure payment gateway.",
-      githubLink: "https://github.com/johndoe/ecommerce-platform",
+      title: "MARGDARSHAN",
+      description: "Markdarshan Truck Routing is an intelligent logistics solution that optimizes truck routes for faster, safer, and more cost-efficient transportation. Using real-time data and smart routing algorithms, it helps drivers avoid delays, reduce fuel consumption, and ensure timely deliveries. The platform improves fleet management by offering accurate navigation, live tracking, and optimized route planning tailored for commercial transport.",
+      githubLink: "https://github.com/Akshaj-mishra/MARGDARSHAN.git",
       imageUrl: ""
     },
     {
-      title: "Real-time Collaboration Tool",
-      description: "Implemented a real-time document collaboration application using WebSockets, allowing multiple users to edit content simultaneously.",
-      githubLink: "https://github.com/johndoe/realtime-collab",
+      title: "SafeMind",
+      description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation. By combining NLP, machine learning, and ethical data processing, the model identifies emotional distress, classifies risk levels, and supports timely human intervention—while ensuring privacy, safety, and responsible AI use.",
+      githubLink: "https://github.com/Akshaj-mishra/SafeMind.git",
       imageUrl: ""
     },
     {
       title: "Personal Portfolio Website",
-      description: "This very website, showcasing my skills and projects, built with React, TypeScript, Tailwind CSS, and Framer Motion.",
-      githubLink: "https://github.com/johndoe/portfolio-website",
+      description: "This portfolio showcases my work as a software developer specializing in C++, Java, Python, MERN Stack, AI/ML, and scalable system design. It highlights my skills, academic background, major projects, and professional profiles—all presented through an interactive, modern UI built with React, Tailwind CSS, and Framer Motion.",
+      githubLink: "https://github.com/Akshaj-mishra/portfolio.git",
       imageUrl: ""
     }
   ],

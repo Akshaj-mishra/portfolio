@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
         animate="visible"
       >
         <motion.h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-light-text dark:text-dark-text" variants={itemVariants}>
-          Hi, I'm <span className="text-light-accent dark:text-dark-accent">{name}</span>
+          Hi, my self <span className="text-light-accent dark:text-dark-accent">{name}</span>
         </motion.h1>
         <motion.p className="text-2xl md:text-3xl font-semibold mb-6 text-gray-700 dark:text-gray-300" variants={itemVariants}>
           {title}
