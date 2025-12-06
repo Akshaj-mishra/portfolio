@@ -1,72 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { personalData } from '../assets/personal';
 
-interface SkillCategory {
-  [key: string]: typeof personalData.skills;
-}
-
 const Skills: React.FC = () => {
   const { skills } = personalData;
+  const [activeCategory, setActiveCategory] = useState('All');
 
-  // Group skills by category
-  const categorizedSkills: SkillCategory = skills.reduce((acc: SkillCategory, skill) => {
-    if (!acc[skill.category]) {
-      acc[skill.category] = [];
+  // Extract unique categories
+  const categories = ['All', ...new Set(skills.map(skill => skill.category))];
+
+  // Filter skills based on active category
+  const filteredSkills = activeCategory === 'All' 
+    ? skills 
+    : skills.filter(skill => skill.category === activeCategory);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
     }
-    acc[skill.category].push(skill);
-    return acc;
-  }, {});
+  };
 
-  const cardVariants = {
-    initial: { y: 50, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    hover: { scale: 1.05, boxShadow: "0px 10px 30px rgba(0,0,0,0.1)" },
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
   };
 
   return (
-    <section id="skills" className="py-16">
-      <motion.h2
-        className="text-4xl font-bold text-center mb-12 text-light-text dark:text-dark-text"
-        initial={{ y: -50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.5 }}
-      >
-        My <span className="text-light-accent dark:text-dark-accent">Skills</span>
-      </motion.h2>
-
-      {Object.entries(categorizedSkills).map(([category, skillList], index) => (
+    <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          key={category}
-          className="mb-12"
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
         >
-          <h3 className="text-3xl font-semibold mb-6 text-light-text dark:text-dark-text border-b border-light-card dark:border-dark-card pb-2">
-            {category}
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {skillList.map((skill, skillIndex) => (
-              <motion.div
-                key={skill.name}
-                className="bg-light-card dark:bg-dark-card p-6 rounded-lg shadow-md flex flex-col items-center justify-center space-y-3 transform hover:-translate-y-2 transition-transform duration-300 border border-light-card dark:border-dark-card"
-                variants={cardVariants}
-                initial="initial"
-                whileInView="animate"
-                whileHover="hover"
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-              >
-                {skill.logo && <skill.logo className="h-10 w-10 text-light-accent dark:text-dark-accent" />}
-                <p className="text-lg font-medium text-light-text dark:text-dark-text">{skill.name}</p>
-              </motion.div>
-            ))}
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+            My <span className="text-blue-600 dark:text-blue-400">Skills</span>
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Technologies and tools I work with
+          </p>
         </motion.div>
-      ))}
+
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-4 py-2 rounded-full transition-all ${
+                activeCategory === category
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* Skills Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        >
+          {filteredSkills.map((skill, index) => {
+            const LogoComponent = skill.logo;
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center"
+              >
+                <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/30 mb-3">
+                  <LogoComponent className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-center">
+                  {skill.name}
+                </h3>
+                <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {skill.category}
+                </span>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
     </section>
   );
 };

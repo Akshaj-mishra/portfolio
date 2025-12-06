@@ -1,4 +1,12 @@
-import { Github, Linkedin, Mail, Code, HardHat, Brain, BookOpenText, GitBranch, Laptop, Database, Brackets, Cloud, Server, Atom, Globe, Lightbulb } from 'lucide-react';
+import { 
+  Github, Linkedin, Mail, 
+  Code, HardHat, Brain, BookOpenText, GitBranch, 
+  Laptop, Database, Brackets, Cloud, Server, 
+  Atom, Globe, Lightbulb, Cpu, Terminal, 
+  Zap, Layers, Webhook, Settings, Network,
+  FileCode, Braces, Binary, GitCompare,
+  Coffee 
+} from 'lucide-react';
 
 export const personalData = {
   name: "Akshaj Mishra",
@@ -7,33 +15,33 @@ export const personalData = {
   profilePhotoUrl: "", 
 
   skills: [
-    { name: "C++", category: "Programming Languages", logo: Code },
-    { name: "Java", category: "Programming Languages", logo: Code },
-    { name: "Python", category: "Programming Languages", logo: Code },
-    { name: "TypeScript", category: "Programming Languages", logo: Lightbulb },
+    { name: "C++", category: "Programming Languages", logo: Braces },
+    { name: "Java", category: "Programming Languages", logo: Coffee },
+    { name: "Python", category: "Programming Languages", logo: FileCode },
+    { name: "TypeScript", category: "Programming Languages", logo: Brackets },
 
     { name: "MongoDB", category: "Web Development", logo: Database },
-    { name: "Express.js", category: "Web Development", logo: Server },
-    { name: "React.js", category: "Web Development", logo: Brackets },
+    { name: "Express.js", category: "Web Development", logo: Webhook },
+    { name: "React.js", category: "Web Development", logo: Atom },
     { name: "Node.js", category: "Web Development", logo: Server },
-    { name: "Vite", category: "Web Development", logo: Atom },
-    { name: "Tailwind CSS", category: "Web Development", logo: Cloud },
+    { name: "Vite", category: "Web Development", logo: Zap },
+    { name: "Tailwind CSS", category: "Web Development", logo: Layers },
     { name: "Framer Motion", category: "Web Development", logo: Globe },
 
     { name: "Local LLMs", category: "AI/ML Tools", logo: Brain },
-    { name: "Gemini APIs", category: "AI/ML Tools", logo: Brain },
-    { name: "TensorFlow", category: "AI/ML Tools", logo: Brain },
-    { name: "PyTorch", category: "AI/ML Tools", logo: Brain },
-    { name: "Scikit-learn", category: "AI/ML Tools", logo: Brain },
-    { name: "Neural Networks", category: "AI/ML Tools", logo: Brain },
+    { name: "Gemini APIs", category: "AI/ML Tools", logo: Network },
+    { name: "TensorFlow", category: "AI/ML Tools", logo: Cpu },
+    { name: "PyTorch", category: "AI/ML Tools", logo: Cpu },
+    { name: "Scikit-learn", category: "AI/ML Tools", logo: Binary },
+    { name: "Neural Networks", category: "AI/ML Tools", logo: Network },
 
-    { name: "DSA", category: "Computer Science Skills", logo: BookOpenText },
-    { name: "Problem-Solving", category: "Computer Science Skills", logo: BookOpenText },
-    { name: "OOP", category: "Computer Science Skills", logo: BookOpenText },
+    { name: "DSA", category: "Computer Science Skills", logo: GitCompare },
+    { name: "Problem-Solving", category: "Computer Science Skills", logo: Lightbulb },
+    { name: "OOP", category: "Computer Science Skills", logo: Settings }, // Changed to Settings
 
     { name: "Git", category: "Version Control & Tools", logo: GitBranch },
     { name: "GitHub", category: "Version Control & Tools", logo: Github },
-    { name: "VS Code", category: "Version Control & Tools", logo: Laptop },
+    { name: "VS Code", category: "Version Control & Tools", logo: Terminal },
   ],
 
   academics: [
@@ -94,5 +102,89 @@ export const personalData = {
   contactEmail: "akshajmishra3@gmail.com",
   emailJSServiceId: "service_xxxx", 
   emailJSTemplateId: "template_xxxx",
-  emailJSPublicKey: "user_xxxx"
+  emailJSPublicKey: "user_xxxx",
+
+  certificates : [
+  {
+    id: 1,
+    title: "Machine Learning Specialization",
+    issuer: "Coursera • Stanford University",
+    date: "June 2023",
+    imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+    skills: ["Python", "TensorFlow", "Neural Networks", "ML Algorithms"],
+    link: "#",
+    credentialId: "ML-2023-001",
+  },
+  {
+    id: 2,
+    title: "Deep Learning Certificate",
+    issuer: "DeepLearning.AI",
+    date: "August 2023",
+    imageUrl: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&h=400&fit=crop",
+    skills: ["Deep Learning", "CNN", "RNN", "PyTorch"],
+    link: "#",
+    credentialId: "DL-2023-002",
+  },
+  {
+    id: 3,
+    title: "Frontend Development",
+    issuer: "Meta • Professional Certificate",
+    date: "May 2023",
+    imageUrl: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?w=600&h=400&fit=crop",
+    skills: ["React", "TypeScript", "CSS", "Responsive Design"],
+    link: "#",
+    credentialId: "FED-2023-003",
+  },
+  {
+    id: 4,
+    title: "Google Cloud Fundamentals",
+    issuer: "Google Cloud",
+    date: "July 2023",
+    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+    skills: ["GCP", "Cloud Computing", "Storage", "Networking"],
+    link: "#",
+    credentialId: "GCP-2023-004",
+  },
+  {
+    id: 5,
+    title: "AI Engineering Basics",
+    issuer: "IBM Skills Network",
+    date: "April 2023",
+    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+    skills: ["AI", "Machine Learning", "Data Science", "Python"],
+    link: "#",
+    credentialId: "AIE-2023-005",
+  },
+  {
+    id: 6,
+    title: "React Mastery",
+    issuer: "Code with Mosh",
+    date: "March 2023",
+    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
+    skills: ["React", "Hooks", "Context API", "Performance"],
+    link: "#",
+    credentialId: "REACT-2023-006",
+  },
+  {
+    id: 7,
+    title: "Docker & DevOps Essentials",
+    issuer: "Kubernetes Academy",
+    date: "September 2023",
+    imageUrl: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&h=400&fit=crop",
+    skills: ["Docker", "Kubernetes", "CI/CD", "DevOps"],
+    link: "#",
+    credentialId: "DEVOPS-2023-007",
+  },
+  {
+    id: 8,
+    title: "Cloud Native Development",
+    issuer: "Cloud Native Foundation",
+    date: "October 2023",
+    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+    skills: ["Microservices", "Containers", "Serverless", "AWS"],
+    link: "#",
+    credentialId: "CNA-2023-008",
+  
+  }
+  ]
 };

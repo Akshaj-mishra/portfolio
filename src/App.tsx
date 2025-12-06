@@ -1,82 +1,70 @@
-import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { Header, Hero, Skills, Academics, Projects, Profiles, Contact, Footer } from './components';
+import React from 'react';
+import { motion } from 'framer-motion';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Academics from './components/Academics';
+import Certificates from './components/Certificate';
+import Profiles from './components/Profiles';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
-// Dark Mode Context setup
-type Theme = 'light' | 'dark';
-interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
-}
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-// Custom hook to use theme context
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};
-
-// ThemeProvider component to wrap the app
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Check local storage for saved theme, default to dark
-    const savedTheme = localStorage.getItem('theme');
-    return (savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark') as Theme;
-  });
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-  };
-
+const App: React.FC = () => {
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-function App() {
-  return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
-  );
-}
-
-function AppContent() {
-  const { theme } = useTheme(); // Access theme from context
-
-  return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-dark-background text-dark-text' : 'bg-light-background text-light-text'} transition-colors duration-300`}>
-      <Toaster position="bottom-right" />
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Header />
-      <main className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <Hero />
-        <Skills />
-        <Academics />
-        <Projects />
-        <Profiles />
-        <Contact />
+      
+      <main className="relative overflow-hidden">
+        {/* Background gradient overlay for smooth blending */}
+        <div className="fixed inset-0 bg-gradient-to-b from-blue-50/30 via-transparent to-purple-50/30 dark:from-gray-900/30 dark:via-transparent dark:to-gray-900/30 pointer-events-none" />
+        
+        {/* Sections with smooth transitions */}
+        <div className="relative z-10">
+          {/* Hero - No background needed as it has its own */}
+          <Hero />
+          
+          {/* Skills - With subtle gradient blend */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/50 to-transparent dark:via-gray-900/50 pointer-events-none" />
+            <Skills />
+          </div>
+          
+          {/* Projects - With subtle gradient blend */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-transparent dark:via-gray-800/50 pointer-events-none" />
+            <Projects />
+          </div>
+          
+          {/* Academics - With subtle gradient blend */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/50 to-transparent dark:via-gray-900/50 pointer-events-none" />
+            <Academics />
+          </div>
+          
+          {/* Certificates - With subtle gradient blend */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-transparent dark:via-gray-800/50 pointer-events-none" />
+            <Certificates />
+          </div>
+          
+          {/* Profiles - With subtle gradient blend */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/50 to-transparent dark:via-gray-900/50 pointer-events-none" />
+            <Profiles />
+          </div>
+          
+          {/* Contact - With subtle gradient blend */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-transparent dark:via-gray-800/50 pointer-events-none" />
+            <Contact />
+          </div>
+        </div>
       </main>
+      
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
