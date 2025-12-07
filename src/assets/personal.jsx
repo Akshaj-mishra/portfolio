@@ -1,12 +1,4 @@
-import { 
-  Github, Linkedin, Mail, 
-  Code, HardHat, Brain, BookOpenText, GitBranch, 
-  Laptop, Database, Brackets, Cloud, Server, 
-  Atom, Globe, Lightbulb, Cpu, Terminal, 
-  Zap, Layers, Webhook, Settings, Network,
-  FileCode, Braces, Binary, GitCompare,
-  Coffee 
-} from 'lucide-react';
+import { Github, Linkedin, Mail, Code, HardHat, Brain, BookOpenText, GitBranch, Laptop, Database, Brackets, Cloud, Server, Atom, Globe, Lightbulb, Cpu, Terminal, Zap, Layers, Webhook, Settings, Network,FileCode, Braces, Binary, GitCompare,Coffee } from 'lucide-react';
 
 import profilePhotoUrl from './profile.jpg';
 import markdarshan from '../assets/projects/markdarshan.png';
@@ -21,7 +13,7 @@ import Introduction_to_Deep_Learning from '../assets/certificates/Introduction t
 import nlp from '../assets/certificates/Introduction to Natural Language Processing.jpg';
 import data from '../assets/certificates/Introduction to Data Science.jpg';
 import gen from '../assets/certificates/Generative models for developers.jpg';
-import nue from '../assets/certificates/neu_ai_page.jpg'
+import nue from '../assets/certificates/neu_ai_page.jpg';
 
 
 
@@ -73,13 +65,13 @@ export const personalData = {
       institution: "Little Flower Hr. Sec. School (Class 12th)",
       degree: "Science Stream",
       year: "2022",
-      details: "Achieved 95% marks."
+      details: "Achieved 70% marks."
     },
     {
       institution: "Little Flower Hr. Sec. School (Class 10th)",
       degree: "General Education",
       year: "2020",
-      details: "Achieved 92% marks."
+      details: "Achieved 70% marks."
     }
   ],
   
@@ -115,13 +107,13 @@ export const personalData = {
   socialLinks: [
     { name: "GitHub", url: "https://github.com/Akshaj-mishra", icon: Github },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/akshaj-mishra-84099a28b", icon: Linkedin },
-    { name: "Gmail", url: "akshajmishra3@gmail.com", icon: Mail }
+    { name: "Gmail", url: "mailto:akshajmishra3@gmail.com", icon: Mail }
   ],
 
   contactEmail: "akshajmishra3@gmail.com",
-  emailJSServiceId: "service_xxxx", 
-  emailJSTemplateId: "template_xxxx",
-  emailJSPublicKey: "user_xxxx",
+  emailJSServiceId: "service_qgo1hsx", 
+  emailJSTemplateId: "template_mb927p9",
+  emailJSPublicKey: "JDKhfRDxVWdjtT2Qa",
 
   certificates : [
   {
