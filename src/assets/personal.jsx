@@ -9,6 +9,12 @@ import {
 } from 'lucide-react';
 
 import profilePhotoUrl from './profile.jpg';
+import markdarshan from '../assets/projects/markdarshan.png';
+import plant from '../assets/projects/plant.png';
+import portfolio from '../assets/projects/portfolio.png';
+import safe_mind from '../assets/projects/safe_mind.png';
+
+
 
 export const personalData = {
   name: "Akshaj Mishra",
@@ -73,25 +79,26 @@ export const personalData = {
       title: "Plantvillage",
       description: "PlantVillage is an open-access platform designed to help farmers identify crop diseases and improve agricultural productivity using AI-powered tools. It combines research, machine learning, and a vast image database to provide quick, accurate diagnoses of plant health issues. By offering practical, data-driven guidance, PlantVillage supports sustainable farming and helps communities increase food security.",
       githubLink: "https://github.com/Akshaj-mishra/plantVillage.git",
-      imageUrl: ""
+      imageUrl: plant ,
     },
     {
       title: "MARGDARSHAN",
       description: "Markdarshan Truck Routing is an intelligent logistics solution that optimizes truck routes for faster, safer, and more cost-efficient transportation. Using real-time data and smart routing algorithms, it helps drivers avoid delays, reduce fuel consumption, and ensure timely deliveries. The platform improves fleet management by offering accurate navigation, live tracking, and optimized route planning tailored for commercial transport.",
       githubLink: "https://github.com/Akshaj-mishra/MARGDARSHAN.git",
-      imageUrl: ""
+      imageUrl: markdarshan ,
+
     },
     {
       title: "SafeMind",
       description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation. By combining NLP, machine learning, and ethical data processing, the model identifies emotional distress, classifies risk levels, and supports timely human intervention—while ensuring privacy, safety, and responsible AI use.",
       githubLink: "https://github.com/Akshaj-mishra/SafeMind.git",
-      imageUrl: ""
+      imageUrl: safe_mind ,
     },
     {
       title: "Personal Portfolio Website",
       description: "This portfolio showcases my work as a software developer specializing in C++, Java, Python, MERN Stack, AI/ML, and scalable system design. It highlights my skills, academic background, major projects, and professional profiles—all presented through an interactive, modern UI built with React, Tailwind CSS, and Framer Motion.",
       githubLink: "https://github.com/Akshaj-mishra/portfolio.git",
-      imageUrl: ""
+      imageUrl: portfolio ,
     }
   ],
 
