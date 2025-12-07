@@ -7,13 +7,6 @@ const Projects: React.FC = () => {
   const { projects } = personalData;
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
-  // Add placeholder images for projects without images
-  const projectImages = [
-    "https://images.unsplash.com/photo-1598696351685-0b2b47772177?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop"
-  ];
 
   const getProjectIcon = (title: string) => {
     if (title.toLowerCase().includes('plant')) return <Brain className="h-6 w-6" />;
@@ -52,7 +45,7 @@ const Projects: React.FC = () => {
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={project.imageUrl || projectImages[index % projectImages.length]}
+                  src={project.imageUrl}
                   alt={project.title}
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                 />

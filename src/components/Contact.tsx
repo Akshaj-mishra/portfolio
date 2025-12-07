@@ -60,9 +60,9 @@ const Contact: React.FC = () => {
     },
     {
       id: 'location',
-      icon: <MapPin className="h-6 w-6" />,
-      title: 'Location',
-      value: 'India',
+      icon: <Phone className="h-6 w-6" />,
+      title: 'Phone N.O',
+      value: 7987826637,
       color: 'from-orange-500 to-red-500'
     }
   ];

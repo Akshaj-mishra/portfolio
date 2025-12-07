@@ -208,7 +208,7 @@ const Hero: React.FC = () => {
               <div className="relative w-64 h-64 md:w-96 md:h-96">
                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full opacity-70 blur-md" />
                 <img
-                  src={profilePhotoUrl || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=face"}
+                  src={profilePhotoUrl}
                   alt={`${name}'s profile`}
                   className="relative w-full h-full rounded-full object-cover border-8 border-white dark:border-gray-800"
                 />

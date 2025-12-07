@@ -8,11 +8,13 @@ import {
   Coffee 
 } from 'lucide-react';
 
+import profilePhotoUrl from './profile.jpg';
+
 export const personalData = {
   name: "Akshaj Mishra",
   title: "Full Stack Developer | AI Enthusiast",
   shortAbout: "Experienced and results-driven Software Developer with a solid foundation in Data Structures and Algorithms (DSA) and expertise in the MERN stack, Java, Python, and C++. I am seeking a challenging role where I can apply my skills in full-stack development, problem-solving, and AI and Machine Learning to drive technical excellence.",
-  profilePhotoUrl: "", 
+  profilePhotoUrl , 
 
   skills: [
     { name: "C++", category: "Programming Languages", logo: Braces },
@@ -37,7 +39,7 @@ export const personalData = {
 
     { name: "DSA", category: "Computer Science Skills", logo: GitCompare },
     { name: "Problem-Solving", category: "Computer Science Skills", logo: Lightbulb },
-    { name: "OOP", category: "Computer Science Skills", logo: Settings }, // Changed to Settings
+    { name: "OOP", category: "Computer Science Skills", logo: Settings }, 
 
     { name: "Git", category: "Version Control & Tools", logo: GitBranch },
     { name: "GitHub", category: "Version Control & Tools", logo: Github },
@@ -110,7 +112,7 @@ export const personalData = {
     title: "Machine Learning Specialization",
     issuer: "Coursera • Stanford University",
     date: "June 2023",
-    imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+    imageUrl: " ",
     skills: ["Python", "TensorFlow", "Neural Networks", "ML Algorithms"],
     link: "#",
     credentialId: "ML-2023-001",
@@ -120,7 +122,7 @@ export const personalData = {
     title: "Deep Learning Certificate",
     issuer: "DeepLearning.AI",
     date: "August 2023",
-    imageUrl: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["Deep Learning", "CNN", "RNN", "PyTorch"],
     link: "#",
     credentialId: "DL-2023-002",
@@ -130,7 +132,7 @@ export const personalData = {
     title: "Frontend Development",
     issuer: "Meta • Professional Certificate",
     date: "May 2023",
-    imageUrl: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["React", "TypeScript", "CSS", "Responsive Design"],
     link: "#",
     credentialId: "FED-2023-003",
@@ -140,7 +142,7 @@ export const personalData = {
     title: "Google Cloud Fundamentals",
     issuer: "Google Cloud",
     date: "July 2023",
-    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["GCP", "Cloud Computing", "Storage", "Networking"],
     link: "#",
     credentialId: "GCP-2023-004",
@@ -150,7 +152,7 @@ export const personalData = {
     title: "AI Engineering Basics",
     issuer: "IBM Skills Network",
     date: "April 2023",
-    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["AI", "Machine Learning", "Data Science", "Python"],
     link: "#",
     credentialId: "AIE-2023-005",
@@ -160,7 +162,7 @@ export const personalData = {
     title: "React Mastery",
     issuer: "Code with Mosh",
     date: "March 2023",
-    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["React", "Hooks", "Context API", "Performance"],
     link: "#",
     credentialId: "REACT-2023-006",
@@ -170,7 +172,7 @@ export const personalData = {
     title: "Docker & DevOps Essentials",
     issuer: "Kubernetes Academy",
     date: "September 2023",
-    imageUrl: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["Docker", "Kubernetes", "CI/CD", "DevOps"],
     link: "#",
     credentialId: "DEVOPS-2023-007",
@@ -180,7 +182,7 @@ export const personalData = {
     title: "Cloud Native Development",
     issuer: "Cloud Native Foundation",
     date: "October 2023",
-    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+    imageUrl: "",
     skills: ["Microservices", "Containers", "Serverless", "AWS"],
     link: "#",
     credentialId: "CNA-2023-008",
