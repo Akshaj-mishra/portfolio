@@ -13,6 +13,16 @@ import markdarshan from '../assets/projects/markdarshan.png';
 import plant from '../assets/projects/plant.png';
 import portfolio from '../assets/projects/portfolio.png';
 import safe_mind from '../assets/projects/safe_mind.png';
+import Artificial_Intelligence from '../assets/certificates/Artificial Intelligence.jpg';
+import cisco_hackathon from '../assets/certificates/cisco_hackathon.jpg'
+import google_solutin_hackathon from '../assets/certificates/google_solutin_hackathon.jpg'
+import Computer_Vision from '../assets/certificates/Computer Vision.jpg';
+import Introduction_to_Deep_Learning from '../assets/certificates/Introduction to Deep Learning.jpg';
+import nlp from '../assets/certificates/Introduction to Natural Language Processing.jpg';
+import data from '../assets/certificates/Introduction to Data Science.jpg';
+import gen from '../assets/certificates/Generative models for developers.jpg';
+import nue from '../assets/certificates/neu_ai_page.jpg'
+
 
 
 
@@ -116,84 +126,86 @@ export const personalData = {
   certificates : [
   {
     id: 1,
-    title: "Machine Learning Specialization",
+    title: "Artificial Intelligence",
     issuer: "Coursera • Stanford University",
     date: "June 2023",
-    imageUrl: " ",
+    imageUrl: Artificial_Intelligence,
     skills: ["Python", "TensorFlow", "Neural Networks", "ML Algorithms"],
-    link: "#",
     credentialId: "ML-2023-001",
   },
   {
     id: 2,
-    title: "Deep Learning Certificate",
-    issuer: "DeepLearning.AI",
+    title: "Cisco Hackathon",
+    issuer: "Cisco",
     date: "August 2023",
-    imageUrl: "",
+    imageUrl: cisco_hackathon,
     skills: ["Deep Learning", "CNN", "RNN", "PyTorch"],
-    link: "#",
     credentialId: "DL-2023-002",
   },
   {
     id: 3,
-    title: "Frontend Development",
-    issuer: "Meta • Professional Certificate",
+    title: "Google Solutin Hackathon",
+    issuer: "Google",
     date: "May 2023",
-    imageUrl: "",
+    imageUrl: google_solutin_hackathon,
     skills: ["React", "TypeScript", "CSS", "Responsive Design"],
-    link: "#",
     credentialId: "FED-2023-003",
   },
   {
     id: 4,
-    title: "Google Cloud Fundamentals",
+    title: "Computer Vision",
     issuer: "Google Cloud",
     date: "July 2023",
-    imageUrl: "",
+    imageUrl: Computer_Vision,
     skills: ["GCP", "Cloud Computing", "Storage", "Networking"],
-    link: "#",
     credentialId: "GCP-2023-004",
   },
   {
     id: 5,
-    title: "AI Engineering Basics",
+    title: "Introduction to Deep Learning",
     issuer: "IBM Skills Network",
     date: "April 2023",
-    imageUrl: "",
+    imageUrl: Introduction_to_Deep_Learning,
     skills: ["AI", "Machine Learning", "Data Science", "Python"],
-    link: "#",
     credentialId: "AIE-2023-005",
   },
   {
     id: 6,
-    title: "React Mastery",
+    title: "Introduction to Natural Language Processing",
     issuer: "Code with Mosh",
     date: "March 2023",
-    imageUrl: "",
+    imageUrl: nlp,
     skills: ["React", "Hooks", "Context API", "Performance"],
-    link: "#",
     credentialId: "REACT-2023-006",
   },
   {
     id: 7,
-    title: "Docker & DevOps Essentials",
+    title: "Introduction to Data Science",
     issuer: "Kubernetes Academy",
     date: "September 2023",
-    imageUrl: "",
+    imageUrl: data,
     skills: ["Docker", "Kubernetes", "CI/CD", "DevOps"],
-    link: "#",
     credentialId: "DEVOPS-2023-007",
   },
   {
     id: 8,
-    title: "Cloud Native Development",
+    title: "Generative models for developers",
     issuer: "Cloud Native Foundation",
     date: "October 2023",
-    imageUrl: "",
+    imageUrl: gen,
     skills: ["Microservices", "Containers", "Serverless", "AWS"],
-    link: "#",
     credentialId: "CNA-2023-008",
-  
+  },
+  {
+  id: 9,
+    title: "NeuCode Challenge",
+    issuer: "Cloud Native Foundation",
+    date: "October 2023",
+    imageUrl: nue,
+    skills: ["Microservices", "Containers", "Serverless", "AWS"],
+    credentialId: "CNA-2023-008",
+
+    
   }
   ]
 };
