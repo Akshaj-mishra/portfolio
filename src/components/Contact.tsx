@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Send, Phone, MapPin, MessageSquare, CheckCircle } from 'lucide-react';
+import { Mail, Phone, CheckCircle } from 'lucide-react';
 import { personalData } from '../assets/personal';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
 const Contact: React.FC = () => {
-  const { emailJSServiceId, emailJSTemplateId, emailJSPublicKey, contactEmail, socialLinks } = personalData;
+  const { emailJSServiceId, emailJSTemplateId, emailJSPublicKey, contactEmail } = personalData;
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,6 +25,14 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Basic validation
+    if (!emailJSServiceId || !emailJSTemplateId || !emailJSPublicKey) {
+      toast.error('EmailJS configuration is missing.');
+      console.error('Missing EmailJS credentials in personalData file.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       await emailjs.send(
         emailJSServiceId,
@@ -32,7 +41,7 @@ const Contact: React.FC = () => {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_email: contactEmail,
+          to_email: contactEmail, // Ensure your EmailJS template uses {{to_email}} or simply hardcode your email in the dashboard
         },
         emailJSPublicKey
       );
@@ -43,7 +52,8 @@ const Contact: React.FC = () => {
 
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      console.error('FAILED...', error); // Check browser console for specific error details
+      toast.error('Failed to send message. Please check your internet or configuration.');
     } finally {
       setIsSubmitting(false);
     }
@@ -61,8 +71,9 @@ const Contact: React.FC = () => {
     {
       id: 'location',
       icon: <Phone className="h-6 w-6" />,
-      title: 'Phone N.O',
-      value: 7987826637,
+      title: 'Phone',
+      value: '7987826637', // Ensure this is a string
+      link: 'tel:7987826637',
       color: 'from-orange-500 to-red-500'
     }
   ];
@@ -85,12 +96,12 @@ const Contact: React.FC = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Methods */}
+          {/* Contact Methods (Left Side) */}
           <div className="lg:col-span-1 space-y-6">
             {contactMethods.map((method) => (
               <div
                 key={method.id}
-                className="bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl"
+                className="bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl transition-transform hover:scale-105"
               >
                 <div className="flex items-start space-x-4">
                   <div className={`p-3 rounded-xl bg-gradient-to-br ${method.color} text-white`}>
@@ -103,7 +114,7 @@ const Contact: React.FC = () => {
                     {method.link ? (
                       <a
                         href={method.link}
-                        className="text-blue-600 dark:text-blue-400 hover:underline"
+                        className="text-blue-600 dark:text-blue-400 hover:underline break-all"
                       >
                         {method.value}
                       </a>
@@ -116,14 +127,14 @@ const Contact: React.FC = () => {
             ))}
           </div>
 
-          {/* Contact Form */}
+          {/* Contact Form (Right Side) */}
           <div className="lg:col-span-2">
             <AnimatePresence>
               {isSuccess ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="bg-white dark:bg-gray-900 p-8 rounded-2xl text-center"
+                  className="bg-white dark:bg-gray-900 p-8 rounded-2xl text-center border border-green-200 dark:border-green-900"
                 >
                   <div className="inline-flex items-center justify-center p-4 bg-green-500 rounded-full mb-6">
                     <CheckCircle className="h-12 w-12 text-white" />
@@ -152,7 +163,7 @@ const Contact: React.FC = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                           required
                           placeholder="John Doe"
                         />
@@ -166,7 +177,7 @@ const Contact: React.FC = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                           required
                           placeholder="john@example.com"
                         />
@@ -181,7 +192,7 @@ const Contact: React.FC = () => {
                         value={formData.message}
                         onChange={handleChange}
                         rows={6}
-                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none transition-all"
                         required
                         placeholder="Hello! I'd like to discuss..."
                       />
@@ -189,9 +200,9 @@ const Contact: React.FC = () => {
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-500/30"
                     >
                       {isSubmitting ? 'Sending...' : 'Send Message'}
                     </motion.button>

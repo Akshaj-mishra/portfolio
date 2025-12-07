@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference or system preference
+    // 1. Initialize Theme
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
@@ -21,14 +21,13 @@ const Header: React.FC = () => {
       document.documentElement.classList.add('dark');
     }
 
+    // 2. Handle Scroll (Appearance & Scroll Spy)
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      // Toggle sticky header style
+      setIsScrolled(window.scrollY > 10);
 
-      const scrollPosition = window.scrollY + 100;
+      // Scroll Spy: Highlight active section based on scroll position
+      const scrollPosition = window.scrollY + 100; // Offset for better accuracy
 
       for (const section of sections) {
         const element = document.getElementById(section.toLowerCase());
@@ -59,9 +58,25 @@ const Header: React.FC = () => {
     }
   };
 
-  const handleNavClick = (section: string) => {
+  // 3. Smooth Scroll Function
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
+    e.preventDefault(); // Stop default "jump"
+    setIsMobileMenuOpen(false); // Close mobile menu if open
     setActiveSection(section);
-    setIsMobileMenuOpen(false);
+
+    const targetId = section.toLowerCase();
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const headerOffset = 85; // Height of your fixed header to prevent covering content
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
@@ -107,8 +122,8 @@ const Header: React.FC = () => {
                 >
                   <a
                     href={`#${item.toLowerCase()}`}
-                    onClick={() => handleNavClick(item)}
-                    className={`relative px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                    onClick={(e) => handleNavClick(e, item)}
+                    className={`relative px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 block ${
                       activeSection === item
                         ? 'text-white'
                         : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -172,7 +187,7 @@ const Header: React.FC = () => {
                     >
                       <a
                         href={`#${item.toLowerCase()}`}
-                        onClick={() => handleNavClick(item)}
+                        onClick={(e) => handleNavClick(e, item)}
                         className={`flex items-center justify-between px-4 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${
                           activeSection === item
                             ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'

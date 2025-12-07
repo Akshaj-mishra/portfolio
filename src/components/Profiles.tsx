@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Users, Star, Activity, TrendingUp } from 'lucide-react';
+import { ExternalLink, Activity } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
 const Profiles: React.FC = () => {
@@ -8,10 +8,17 @@ const Profiles: React.FC = () => {
   const [activeProfile, setActiveProfile] = useState<string | null>(null);
   const [hoveredProfile, setHoveredProfile] = useState<string | null>(null);
 
-  // Enhance social links with additional data
+  // Enhance social links with additional data and fix Gmail URL
   const enhancedProfiles = socialLinks.map((profile, index) => {
+    // Fix Gmail URL to ensure it opens email client
+    let processedUrl = profile.url;
+    if (profile.name === 'Gmail' && !processedUrl.startsWith('mailto:')) {
+      processedUrl = `mailto:${processedUrl}`;
+    }
+
     const baseProfile = {
       ...profile,
+      url: processedUrl, // Use the processed URL
       color: '',
       gradient: '',
       description: '',
@@ -212,7 +219,7 @@ const Profiles: React.FC = () => {
                       whileTap={{ scale: 0.98 }}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <span>Visit Profile</span>
+                      <span>{profile.name === 'Gmail' ? 'Send Email' : 'Visit Profile'}</span>
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </motion.a>
                   </div>
@@ -220,82 +227,6 @@ const Profiles: React.FC = () => {
               </motion.div>
             );
           })}
-        </motion.div>
-
-        {/* Stats Overview */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-16"
-        >
-          <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">
-              Platform Activity
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl text-center shadow-lg"
-              >
-                <div className="inline-flex items-center justify-center p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
-                  <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  1k+
-                </div>
-                <div className="text-gray-600 dark:text-gray-300">
-                  Total Connections
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl text-center shadow-lg"
-              >
-                <div className="inline-flex items-center justify-center p-3 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
-                  <Activity className="h-6 w-6 text-green-600 dark:text-green-400" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  100%
-                </div>
-                <div className="text-gray-600 dark:text-gray-300">
-                  Active Profiles
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl text-center shadow-lg"
-              >
-                <div className="inline-flex items-center justify-center p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
-                  <TrendingUp className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  24h
-                </div>
-                <div className="text-gray-600 dark:text-gray-300">
-                  Avg. Response
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl text-center shadow-lg"
-              >
-                <div className="inline-flex items-center justify-center p-3 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-4">
-                  <Star className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  4.8
-                </div>
-                <div className="text-gray-600 dark:text-gray-300">
-                  Satisfaction
-                </div>
-              </motion.div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Profile Detail Modal */}
@@ -362,7 +293,7 @@ const Profiles: React.FC = () => {
                               className="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
                             >
                               <ExternalLink className="h-5 w-5 mr-2" />
-                              Open {profile.name}
+                              {profile.name === 'Gmail' ? 'Send Email' : `Open ${profile.name}`}
                             </a>
                           </div>
                         </div>

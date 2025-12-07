@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -21,44 +20,48 @@ const App: React.FC = () => {
         
         {/* Sections with smooth transitions */}
         <div className="relative z-10">
-          {/* Hero - No background needed as it has its own */}
-          <Hero />
           
-          {/* Skills - With subtle gradient blend */}
-          <div className="relative">
+          {/* Hero Section */}
+          <div id="hero">
+            <Hero />
+          </div>
+          
+          {/* Skills Section */}
+          <div id="skills" className="relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/50 to-transparent dark:via-gray-900/50 pointer-events-none" />
             <Skills />
           </div>
           
-          {/* Projects - With subtle gradient blend */}
-          <div className="relative">
+          {/* Projects Section */}
+          <div id="projects" className="relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-transparent dark:via-gray-800/50 pointer-events-none" />
             <Projects />
           </div>
           
-          {/* Academics - With subtle gradient blend */}
-          <div className="relative">
+          {/* Academics Section */}
+          <div id="academics" className="relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/50 to-transparent dark:via-gray-900/50 pointer-events-none" />
             <Academics />
           </div>
           
-          {/* Certificates - With subtle gradient blend */}
-          <div className="relative">
+          {/* Certificates Section */}
+          <div id="certificates" className="relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-transparent dark:via-gray-800/50 pointer-events-none" />
             <Certificates />
           </div>
           
-          {/* Profiles - With subtle gradient blend */}
-          <div className="relative">
+          {/* Profiles Section */}
+          <div id="profiles" className="relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/50 to-transparent dark:via-gray-900/50 pointer-events-none" />
             <Profiles />
           </div>
           
-          {/* Contact - With subtle gradient blend */}
-          <div className="relative">
+          {/* Contact Section */}
+          <div id="contact" className="relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-transparent dark:via-gray-800/50 pointer-events-none" />
             <Contact />
           </div>
+
         </div>
       </main>
       

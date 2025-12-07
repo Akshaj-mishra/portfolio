@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, ExternalLink, ChevronLeft, ChevronRight, X, Eye, Download } from 'lucide-react';
+import { Award, ChevronLeft, ChevronRight, X, Eye, Download, Maximize2 } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
+// Define certificate type based on your data structure
+interface Certificate {
+  title: string;
+  issuer: string;
+  date: string;
+  imageUrl: string;
+}
+
 const Certificates: React.FC = () => {
-  // Get certificates from personalData
-  const certificates = personalData.certificates || [];
+  // Get certificates from personalData - using type assertion for safety
+  const certificates = (personalData.certificates || []) as Certificate[];
   
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedCert, setSelectedCert] = useState<typeof certificates[0] | null>(null);
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'stack'>('grid');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
 
   const nextCertificate = () => {
     setActiveIndex((prev) => (prev + 1) % certificates.length);
@@ -29,6 +39,47 @@ const Certificates: React.FC = () => {
     }
     return result;
   };
+
+  const openFullscreen = (imageUrl: string) => {
+    setFullscreenImage(imageUrl);
+    setIsFullscreen(true);
+    // Disable body scroll when fullscreen is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenImage(null);
+    setIsFullscreen(false);
+    // Re-enable body scroll
+    document.body.style.overflow = 'auto';
+  };
+
+  const downloadCertificate = (imageUrl: string, title: string) => {
+    // Create a temporary anchor element
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = `${title.replace(/\s+/g, '_')}_certificate.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Handle ESC key press to close fullscreen
+  useEffect(() => {
+    const handleEscKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullscreen) {
+        closeFullscreen();
+      }
+    };
+
+    if (isFullscreen) {
+      document.addEventListener('keydown', handleEscKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isFullscreen]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -114,7 +165,7 @@ const Certificates: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* View Mode Toggle - Only show if we have certificates */}
+        {/* View Mode Toggle */}
         {certificates.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -158,95 +209,60 @@ const Certificates: React.FC = () => {
           >
             {certificates.map((cert, index) => (
               <motion.div
-                key={cert.id}
+                key={`${cert.title}-${index}`}
                 variants={cardVariants}
                 custom={index}
-                className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 dark:border-gray-700/20"
+                className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 dark:border-gray-700/20 cursor-pointer"
                 whileHover={{ y: -8 }}
+                onClick={() => setSelectedCert(cert)}
               >
                 {/* Gradient Border Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                 
                 {/* Certificate Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={cert.imageUrl}
-                    alt={cert.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img
+                      src={cert.imageUrl}
+                      alt={cert.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={{
+                        // Aligned to top center to ensure the main content is visible, cutting off bottom if needed
+                        objectPosition: 'top center'
+                      }}
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   <div className="absolute top-4 right-4">
                     <span className="px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
                       Verified
                     </span>
                   </div>
+                  {/* Fullscreen Button Overlay */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openFullscreen(cert.imageUrl);
+                    }}
+                    className="absolute top-4 left-4 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full transition-all hover:scale-110 opacity-0 group-hover:opacity-100"
+                    title="View Fullscreen"
+                  >
+                    <Maximize2 className="h-5 w-5 text-white" />
+                  </button>
                 </div>
 
-                {/* Content */}
+                {/* Content - Footer Actions Removed */}
                 <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-start justify-between">
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {cert.title}
                       </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{cert.issuer}</p>
                     </div>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded whitespace-nowrap ml-2">
                       {cert.date}
                     </span>
-                  </div>
-
-                  {/* Skills Tags */}
-                  {cert.skills && cert.skills.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {cert.skills.map((skill, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Actions */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      ID: {cert.credentialId || `CERT-${cert.id}`}
-                    </span>
-                    <div className="flex items-center space-x-2">
-                      <button
-                        onClick={() => setSelectedCert(cert)}
-                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
-                        title="View Details"
-                      >
-                        <Eye className="h-5 w-5" />
-                      </button>
-                      {cert.link && cert.link !== '#' && (
-                        <a
-                          href={cert.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
-                          title="Open Certificate"
-                        >
-                          <ExternalLink className="h-5 w-5" />
-                        </a>
-                      )}
-                      <button
-                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
-                        title="Download"
-                        onClick={() => {
-                          // Simulate download
-                          if (cert.link && cert.link !== '#') {
-                            window.open(cert.link, '_blank');
-                          }
-                        }}
-                      >
-                        <Download className="h-5 w-5" />
-                      </button>
-                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -261,7 +277,7 @@ const Certificates: React.FC = () => {
           >
             {getVisibleCertificates().map((cert, index) => (
               <motion.div
-                key={cert.id}
+                key={`${cert.title}-${index}`}
                 custom={index}
                 variants={stackCardVariants}
                 initial="hidden"
@@ -276,30 +292,34 @@ const Certificates: React.FC = () => {
                 whileHover={index === 0 ? { scale: 1.02 } : {}}
               >
                 <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={cert.imageUrl}
-                    alt={cert.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img
+                      src={cert.imageUrl}
+                      alt={cert.title}
+                      className="w-full h-full object-cover"
+                      style={{
+                        objectPosition: 'top center'
+                      }}
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  {/* Fullscreen Button for Stack View */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openFullscreen(cert.imageUrl);
+                    }}
+                    className="absolute top-4 left-4 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full transition-all hover:scale-110"
+                    title="View Fullscreen"
+                  >
+                    <Maximize2 className="h-5 w-5 text-white" />
+                  </button>
                   <div className="absolute bottom-4 left-6">
                     <h3 className="text-xl font-bold text-white">{cert.title}</h3>
                     <p className="text-gray-200 text-sm">{cert.issuer}</p>
                   </div>
                 </div>
                 <div className="p-6">
-                  {cert.skills && cert.skills.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {cert.skills.slice(0, 3).map((skill, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600 dark:text-gray-400">{cert.date}</span>
                     <button
@@ -354,11 +374,24 @@ const Certificates: React.FC = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative">
-                  <img
-                    src={selectedCert.imageUrl}
-                    alt={selectedCert.title}
-                    className="w-full h-64 object-cover"
-                  />
+                  <div className="w-full h-64 overflow-hidden">
+                    <img
+                      src={selectedCert.imageUrl}
+                      alt={selectedCert.title}
+                      className="w-full h-full object-cover"
+                      style={{
+                        objectPosition: 'top center'
+                      }}
+                    />
+                  </div>
+                  {/* Fullscreen Button in Details Modal */}
+                  <button
+                    onClick={() => openFullscreen(selectedCert.imageUrl)}
+                    className="absolute top-4 left-4 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full transition-all hover:scale-110"
+                    title="View Fullscreen"
+                  >
+                    <Maximize2 className="h-5 w-5 text-white" />
+                  </button>
                   <button
                     onClick={() => setSelectedCert(null)}
                     className="absolute top-4 right-4 p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full hover:bg-white dark:hover:bg-gray-700 border border-white/20 dark:border-gray-700/20"
@@ -382,54 +415,86 @@ const Certificates: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">
-                        Credential ID
+                        Issuing Organization
                       </h4>
-                      <p className="text-gray-900 dark:text-white">{selectedCert.credentialId || `CERT-${selectedCert.id}`}</p>
+                      <p className="text-gray-900 dark:text-white">{selectedCert.issuer}</p>
                     </div>
                   </div>
 
-                  {selectedCert.skills && selectedCert.skills.length > 0 && (
-                    <div className="mb-8">
-                      <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">
-                        Skills Acquired
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedCert.skills.map((skill, idx) => (
-                          <span
-                            key={idx}
-                            className="px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-600 dark:text-blue-400 rounded-lg font-medium"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
                   <div className="flex space-x-4">
-                    {selectedCert.link && selectedCert.link !== '#' && (
-                      <a
-                        href={selectedCert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
-                      >
-                        <ExternalLink className="h-5 w-5 mr-2" />
-                        View Full Certificate
-                      </a>
-                    )}
+                    <button
+                      onClick={() => openFullscreen(selectedCert.imageUrl)}
+                      className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
+                    >
+                      <Maximize2 className="h-5 w-5 mr-2" />
+                      View Fullscreen
+                    </button>
                     <button
                       className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                       onClick={() => {
-                        if (selectedCert.link && selectedCert.link !== '#') {
-                          window.open(selectedCert.link, '_blank');
-                        }
+                        downloadCertificate(selectedCert.imageUrl, selectedCert.title);
                       }}
                     >
                       <Download className="h-5 w-5 mr-2 inline" />
                       Download
                     </button>
                   </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Fullscreen Image Modal - Full image without cropping */}
+        <AnimatePresence>
+          {isFullscreen && fullscreenImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-[60] flex items-center justify-center p-4"
+            >
+              <motion.div
+                initial={{ scale: 0.95 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.95 }}
+                className="relative w-full h-full flex items-center justify-center"
+              >
+                <img
+                  src={fullscreenImage}
+                  alt="Certificate Fullscreen"
+                  className="max-w-full max-h-full object-contain"
+                />
+                
+                {/* Close Button */}
+                <button
+                  onClick={closeFullscreen}
+                  className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all hover:scale-110 border border-white/20"
+                >
+                  <X className="h-6 w-6 text-white" />
+                </button>
+
+                {/* Download Button */}
+                <button
+                  onClick={() => {
+                    if (fullscreenImage) {
+                      const link = document.createElement('a');
+                      link.href = fullscreenImage;
+                      link.download = 'certificate_fullscreen.jpg';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }
+                  }}
+                  className="absolute bottom-6 right-6 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all hover:scale-110 border border-white/20"
+                  title="Download"
+                >
+                  <Download className="h-6 w-6 text-white" />
+                </button>
+
+                {/* Escape hint */}
+                <div className="absolute bottom-6 left-6 text-white/70 text-sm">
+                  Press ESC or click X to close
                 </div>
               </motion.div>
             </motion.div>
