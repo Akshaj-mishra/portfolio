@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Eye, Code, Brain, Server, Database, CheckCircle } from 'lucide-react';
+import { Github, ExternalLink, Brain, Server, Code, CheckCircle } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
 const Projects: React.FC = () => {
@@ -14,12 +14,24 @@ const Projects: React.FC = () => {
     return <Server className="h-6 w-6" />;
   };
 
-  // Get tech badges for a project
   const getTechBadges = (project: typeof projects[0]) => {
     if (project.techStack) {
-      return project.techStack.slice(0, 3); // Show only first 3 tech badges
+      return project.techStack.slice(0, 3);
     }
     return [];
+  };
+
+  // FIX 1: Define Variants for stable state management
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.5, 
+        ease: "easeOut" 
+      } 
+    }
   };
 
   return (
@@ -43,11 +55,15 @@ const Projects: React.FC = () => {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="bg-gray-50 dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              // FIX 2: Use variants instead of inline initial/animate
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              // FIX 3: Add 'amount: 0.2' to ensure animation only triggers when 20% of card is visible
+              // This prevents the "already in view" glitch
+              viewport={{ once: true, amount: 0.2 }}
+              custom={index}
+              className="bg-gray-50 dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
@@ -92,7 +108,7 @@ const Projects: React.FC = () => {
                   </div>
                 )}
 
-                {/* Project Points Preview (show first 2 points) */}
+                {/* Project Points Preview */}
                 <div className="mb-4">
                   {project.points && project.points.slice(0, 2).map((point, idx) => (
                     <div key={idx} className="flex items-start mb-2">
@@ -122,7 +138,6 @@ const Projects: React.FC = () => {
                       View Code
                     </a>
                     
-                    {/* Live Link Button - Only show if not '#' */}
                     {project.liveLink && project.liveLink !== '#' && (
                       <a
                         href={project.liveLink}
@@ -221,7 +236,6 @@ const Projects: React.FC = () => {
                       View on GitHub
                     </a>
                     
-                    {/* Conditional Live Link Button */}
                     {selectedProject.liveLink && selectedProject.liveLink !== '#' && (
                       <a
                         href={selectedProject.liveLink}
