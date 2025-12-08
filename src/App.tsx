@@ -13,25 +13,25 @@ import { AppContext } from './context/Appcontext';
 const App: React.FC = () => {
   const context = useContext(AppContext);
 
-  // 1. Safety Check: prevent crash if context is null
+  
   if (!context) {
     return <div>Loading...</div>;
   }
 
-  // Make sure your AppContext actually has 'showheader' defined in its interface!
+
   const { showheader } = context;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       
-      {/* 2. Logic Fix: Condition goes FIRST */}
+      
       {showheader && <Header />}
       
       <main className="relative overflow-hidden">
-        {/* Background gradient overlay for smooth blending */}
+       
         <div className="fixed inset-0 bg-gradient-to-b from-blue-50/30 via-transparent to-purple-50/30 dark:from-gray-900/30 dark:via-transparent dark:to-gray-900/30 pointer-events-none" />
         
-        {/* Sections with smooth transitions */}
+       
         <div className="relative z-10">
           
           <div id="hero">
