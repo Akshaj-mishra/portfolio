@@ -101,12 +101,12 @@ export const personalData = {
       imageUrl: markdarshan,
       techStack: ["Fast API", "Next", "Type Script", "MongoDB", "Xg Boast Model", "Google Maps API" , "Express"],
       points: [
-        "Intelligent route optimization using real-time data",
-        "Reduces fuel consumption and transportation costs",
-        "Live tracking and accurate navigation for commercial transport",
-        "Smart routing algorithms to avoid delays and ensure timely deliveries",
-        "Fleet management optimization for logistics companies",
-        "Tailored specifically for truck and commercial vehicle routing"
+        "Developed an AI-powered logistics platform that optimizes truck routing for faster, safer, and cost-efficient transportation.",
+        "Built a scalable backend using FastAPI + Express.js, integrating XGBoost models for predictive routing metrics (ETA, fuel estimation, risk scoring).",
+        "Created a modern Next.js + TypeScript frontend for real-time fleet visualization, dynamic dispatching, and driver–owner communication.",
+        "Integrated Google Maps API traffic-aware navigation, and intelligent location suggestions (fuel, rest stops).",
+        "Designed modular services for route planning, vehicle constraints, driver analytics, and operations monitoring.",
+        "Implemented database management using MongoDB, enabling high-volume geospatial queries and live tracking."
       ]
     },
     {
