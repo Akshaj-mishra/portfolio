@@ -99,7 +99,7 @@ export const personalData = {
       githubLink: "https://github.com/Akshaj-mishra/MARGDARSHAN",
       liveLink: "#", 
       imageUrl: markdarshan,
-      techStack: ["Python", "TensorFlow", "React", "FastAPI", "OpenCV", "MongoDB"],
+      techStack: ["Fast API", "Next", "Type Script", "MongoDB", "Xg Boast Model", "Google Maps API" , "Express"],
       points: [
         "Intelligent route optimization using real-time data",
         "Reduces fuel consumption and transportation costs",
@@ -113,9 +113,9 @@ export const personalData = {
       title: "SafeMind",
       description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation.",
       githubLink: "https://github.com/Akshaj-mishra/SafeMind",
-      liveLink: "#", 
+      liveLink: "#", // if put # then live link option is diabled for that project
       imageUrl: safe_mind,
-      techStack: ["Python", "TensorFlow", "React", "FastAPI", "OpenCV", "MongoDB"],
+      techStack: ["Python", "TensorFlow", "DNN", "FastAPI", "OpenCV", "LangChain"],
       points: [
         "AI-powered system for detecting suicidal ideation from text",
         "Uses NLP and machine learning for emotional distress analysis",
@@ -129,9 +129,9 @@ export const personalData = {
       title: "Personal Portfolio Website",
       description: "This portfolio showcases my work as a software developer specializing in C++, Java, Python, MERN Stack, AI/ML, and scalable system design. It highlights my skills, academic background, major projects, and professional profiles—all presented through an interactive, modern UI built with React, Tailwind CSS, and Framer Motion.",
       githubLink: "https://github.com/Akshaj-mishra/portfolio",
-      liveLink: "#", // if put # then live link option is diabled for that project
+      liveLink: "#", 
       imageUrl: portfolio,
-      techStack: ["Python", "TensorFlow", "React", "FastAPI", "OpenCV", "MongoDB"],
+      techStack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite", "EmailJS"],
       points: [
         "Modern, responsive UI built with React and Tailwind CSS",
         "Interactive animations using Framer Motion library",
