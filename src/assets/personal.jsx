@@ -54,7 +54,7 @@ export const personalData = {
     { name: "VS Code", category: "Version Control & Tools", logo: Terminal },
     { name: "Docker", category: "Version Control & Tools", logo: Sailboat },
     { name: "Fast API", category: "AI/ML Tools", logo: Network },
-    { name: "DNN", category: "AI/ML Tools", logo: Brain },
+    { name: "DL", category: "AI/ML Tools", logo: Brain },
   ],
 
   academics: [

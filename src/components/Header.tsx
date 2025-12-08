@@ -21,25 +21,30 @@ const Header: React.FC = () => {
       document.documentElement.classList.add('dark');
     }
 
-    // 2. Handle Scroll (Appearance & Scroll Spy)
     const handleScroll = () => {
-      // Toggle sticky header style
-      setIsScrolled(window.scrollY > 10);
+  setIsScrolled(window.scrollY > 10);
 
-      // Scroll Spy: Highlight active section based on scroll position
-      const scrollPosition = window.scrollY + 100; // Offset for better accuracy
+  // 1. Bottom of Page Check (Force last section active)
+  // We use a small buffer (e.g., 50px) to account for mobile browser discrepancies
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+    setActiveSection(sections[sections.length - 1]);
+    return; 
+  }
 
-      for (const section of sections) {
-        const element = document.getElementById(section.toLowerCase());
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
+  // 2. Standard Scroll Spy Logic
+  const scrollPosition = window.scrollY + 100;
+
+  for (const section of sections) {
+    const element = document.getElementById(section.toLowerCase());
+    if (element) {
+      const { offsetTop, offsetHeight } = element;
+      if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+        setActiveSection(section);
+        break;
       }
-    };
+    }
+  }
+};
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
