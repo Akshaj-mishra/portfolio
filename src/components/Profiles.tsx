@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Activity } from 'lucide-react';
+import { ExternalLink, Activity, Mail } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
 const Profiles: React.FC = () => {
@@ -8,9 +8,7 @@ const Profiles: React.FC = () => {
   const [activeProfile, setActiveProfile] = useState<string | null>(null);
   const [hoveredProfile, setHoveredProfile] = useState<string | null>(null);
 
-  // Enhance social links with additional data and fix Gmail URL
   const enhancedProfiles = socialLinks.map((profile, index) => {
-    // Fix Gmail URL to ensure it opens email client
     let processedUrl = profile.url;
     if (profile.name === 'Gmail' && !processedUrl.startsWith('mailto:')) {
       processedUrl = `mailto:${processedUrl}`;
@@ -18,20 +16,19 @@ const Profiles: React.FC = () => {
 
     const baseProfile = {
       ...profile,
-      url: processedUrl, // Use the processed URL
+      url: processedUrl,
       color: '',
       gradient: '',
       description: '',
       stats: { value: '', label: '' }
     };
 
-    // Add platform-specific data
     switch (profile.name) {
       case 'GitHub':
         return {
           ...baseProfile,
-          color: 'bg-gray-800',
-          gradient: 'from-gray-800 to-gray-900',
+          color: 'bg-black', 
+          gradient: 'from-gray-900 to-black',
           description: 'Code repositories and projects',
           stats: { value: '15+', label: 'Repos' }
         };
@@ -66,9 +63,7 @@ const Profiles: React.FC = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
@@ -77,25 +72,16 @@ const Profiles: React.FC = () => {
     visible: {
       scale: 1,
       opacity: 1,
-      transition: {
-        duration: 0.5,
-        type: "spring",
-        stiffness: 100
-      }
+      transition: { duration: 0.5, type: "spring", stiffness: 100 }
     },
     hover: {
       scale: 1.05,
       y: -10,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.3, ease: "easeOut" }
     },
     tap: {
       scale: 0.95,
-      transition: {
-        duration: 0.1
-      }
+      transition: { duration: 0.1 }
     }
   };
 
@@ -114,7 +100,6 @@ const Profiles: React.FC = () => {
   return (
     <section id="profiles" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -130,7 +115,6 @@ const Profiles: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Profile Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -140,6 +124,7 @@ const Profiles: React.FC = () => {
         >
           {enhancedProfiles.map((profile, index) => {
             const IconComponent = profile.icon;
+            const isGmail = profile.name === 'Gmail';
             
             return (
               <motion.div
@@ -153,9 +138,7 @@ const Profiles: React.FC = () => {
                 onClick={() => setActiveProfile(profile.name)}
                 className="relative group cursor-pointer"
               >
-                {/* Main Card */}
                 <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
-                  {/* Animated Background */}
                   <motion.div
                     className={`absolute inset-0 bg-gradient-to-br ${profile.gradient} opacity-0 group-hover:opacity-10`}
                     animate={{
@@ -164,7 +147,6 @@ const Profiles: React.FC = () => {
                     transition={{ duration: 0.5 }}
                   />
 
-                  {/* Card Content */}
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-6">
                       <motion.div
@@ -179,7 +161,11 @@ const Profiles: React.FC = () => {
                         transition={{ duration: 0.5 }}
                         className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-gray-200 dark:group-hover:bg-gray-600"
                       >
-                        <ExternalLink className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                        {isGmail ? (
+                            <Mail className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                        ) : (
+                            <ExternalLink className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                        )}
                       </motion.div>
                     </div>
 
@@ -190,7 +176,6 @@ const Profiles: React.FC = () => {
                       {profile.description}
                     </p>
 
-                    {/* Stats */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700">
@@ -208,19 +193,18 @@ const Profiles: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Visit Button */}
                   <div className="px-6 pb-6">
                     <motion.a
                       href={profile.url}
-                      target="_blank"
+                      target={isGmail ? '_self' : '_blank'}
                       rel="noopener noreferrer"
                       className={`flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-white ${profile.color} hover:shadow-lg transition-all duration-300`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <span>{profile.name === 'Gmail' ? 'Send Email' : 'Visit Profile'}</span>
-                      <ExternalLink className="ml-2 h-4 w-4" />
+                      <span>{isGmail ? 'Send Email' : 'Visit Profile'}</span>
+                      {isGmail ? <Mail className="ml-2 h-4 w-4" /> : <ExternalLink className="ml-2 h-4 w-4" />}
                     </motion.a>
                   </div>
                 </div>
@@ -229,7 +213,6 @@ const Profiles: React.FC = () => {
           })}
         </motion.div>
 
-        {/* Profile Detail Modal */}
         <AnimatePresence>
           {activeProfile && (
             <motion.div
@@ -243,13 +226,14 @@ const Profiles: React.FC = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full"
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {
                   const profile = enhancedProfiles.find(p => p.name === activeProfile);
                   if (!profile) return null;
                   const IconComponent = profile.icon;
+                  const isGmail = profile.name === 'Gmail';
 
                   return (
                     <>
@@ -288,12 +272,12 @@ const Profiles: React.FC = () => {
                           <div className="pt-6">
                             <a
                               href={profile.url}
-                              target="_blank"
+                              target={isGmail ? '_self' : '_blank'}
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
+                              className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${profile.gradient} text-white font-medium rounded-lg hover:shadow-lg transition-shadow`}
                             >
-                              <ExternalLink className="h-5 w-5 mr-2" />
-                              {profile.name === 'Gmail' ? 'Send Email' : `Open ${profile.name}`}
+                              {isGmail ? <Mail className="h-5 w-5 mr-2" /> : <ExternalLink className="h-5 w-5 mr-2" />}
+                              {isGmail ? 'Send Email' : `Open ${profile.name}`}
                             </a>
                           </div>
                         </div>

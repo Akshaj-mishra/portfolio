@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react'; // 1. Added useContext
 import { motion, AnimatePresence } from 'framer-motion';
 import { Award, ChevronLeft, ChevronRight, X, Eye, Download, Maximize2 } from 'lucide-react';
 import { personalData } from '../assets/personal';
+import { AppContext } from '../context/Appcontext'; // 2. Import your Context
 
 // Define certificate type based on your data structure
 interface Certificate {
@@ -12,6 +13,16 @@ interface Certificate {
 }
 
 const Certificates: React.FC = () => {
+  // 3. Consume the Context
+  const context = useContext(AppContext);
+  
+  // Safety check to ensure context exists
+  if (!context) {
+    throw new Error("Certificates must be used within an AppContextProvider");
+  }
+  
+  const { setshowheader } = context;
+
   // Get certificates from personalData - using type assertion for safety
   const certificates = (personalData.certificates || []) as Certificate[];
   
@@ -20,6 +31,20 @@ const Certificates: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'stack'>('grid');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+
+  // 4. NEW EFFECT: Toggle Header visibility based on fullscreen state
+  useEffect(() => {
+    if (isFullscreen) {
+      setshowheader(false); // Hide header when fullscreen opens
+    } else {
+      setshowheader(true);  // Show header when fullscreen closes
+    }
+
+    // Cleanup: Ensure header comes back if this component unmounts unexpectedly
+    return () => {
+      setshowheader(true);
+    };
+  }, [isFullscreen, setshowheader]);
 
   const nextCertificate = () => {
     setActiveIndex((prev) => (prev + 1) % certificates.length);
@@ -42,14 +67,14 @@ const Certificates: React.FC = () => {
 
   const openFullscreen = (imageUrl: string) => {
     setFullscreenImage(imageUrl);
-    setIsFullscreen(true);
+    setIsFullscreen(true); // This triggers the useEffect above to hide header
     // Disable body scroll when fullscreen is open
     document.body.style.overflow = 'hidden';
   };
 
   const closeFullscreen = () => {
     setFullscreenImage(null);
-    setIsFullscreen(false);
+    setIsFullscreen(false); // This triggers the useEffect above to show header
     // Re-enable body scroll
     document.body.style.overflow = 'auto';
   };
