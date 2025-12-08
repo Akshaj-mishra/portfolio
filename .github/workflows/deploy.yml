@@ -36,7 +36,7 @@ jobs:
       - name: Upload build folder
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build
+          path: ./dist   # ⬅ IMPORTANT for Vite
 
   deploy:
     runs-on: ubuntu-latest
