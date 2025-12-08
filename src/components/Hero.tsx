@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
-import { ArrowDown, Mail, Github, Linkedin, Sparkles, Cpu, Code, Brain, Rocket } from 'lucide-react';
+import { Mail, Github, Linkedin, Sparkles, Rocket } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
 const Hero: React.FC = () => {
-  const { name, title, shortAbout, profilePhotoUrl, socialLinks, contactEmail } = personalData;
-  const [isHovered, setIsHovered] = useState(false);
+  const { name, shortAbout, profilePhotoUrl, socialLinks } = personalData;
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const controls = useAnimation();
 
-  // Extract titles from your existing data
   const titles = [
     "Full Stack Developer | AI Enthusiast",
     "MERN Stack Expert",
@@ -35,8 +33,16 @@ const Hero: React.FC = () => {
     sequence();
   }, [controls]);
 
-  // Use your existing social links
+  // --- UPDATED SOCIAL MAPPING LOGIC ---
   const socialButtons = socialLinks.map(link => {
+    // 1. Handle Gmail URL transformation
+    let processedUrl = link.url;
+    
+    if (link.name === 'Gmail') {
+      const email = link.url.replace('mailto:', '');
+      processedUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=Portfolio Inquiry&body=Hi Akshaj, I came across your portfolio...`;
+    }
+
     const iconMap: Record<string, React.ReactNode> = {
       'GitHub': <Github className="h-6 w-6" />,
       'LinkedIn': <Linkedin className="h-6 w-6" />,
@@ -51,7 +57,7 @@ const Hero: React.FC = () => {
 
     return {
       name: link.name,
-      url: link.url,
+      url: processedUrl, // Use the processed URL
       icon: iconMap[link.name] || <Github className="h-6 w-6" />,
       color: colorMap[link.name] || 'bg-gray-800 hover:bg-gray-900'
     };
@@ -148,6 +154,8 @@ const Hero: React.FC = () => {
               variants={itemVariants}
               className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start"
             >
+              {/* Note: This Main Button still links to #contact section (scrolling), which is usually preferred for the main CTA. 
+                  If you want this to ALSO open Gmail, change href to the computed gmail URL. */}
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
@@ -182,7 +190,7 @@ const Hero: React.FC = () => {
                 <motion.a
                   key={social.name}
                   href={social.url}
-                  target="_blank"
+                  target="_blank" // Ensures new tab for Gmail and others
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}

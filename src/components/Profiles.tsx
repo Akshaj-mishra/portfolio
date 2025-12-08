@@ -9,16 +9,17 @@ const Profiles: React.FC = () => {
   const [hoveredProfile, setHoveredProfile] = useState<string | null>(null);
 
   const enhancedProfiles = socialLinks.map((profile, index) => {
-    // For Gmail, create a proper mailto URL with subject and body if desired
     let processedUrl = profile.url;
     let isGmail = false;
     
     if (profile.name === 'Gmail') {
       isGmail = true;
-      // Extract email from the URL (remove mailto: if present)
+      // 1. Extract the email address (remove 'mailto:')
       const email = profile.url.replace('mailto:', '');
-      // Create a proper mailto URL with subject and optional body
-      processedUrl = `mailto:${email}?subject=Portfolio Inquiry&body=Hi Akshaj, I came across your portfolio and wanted to connect...`;
+      
+      // 2. Create the specific Google Mail Web URL
+      // view=cm (compose mode), fs=1 (fullscreen), to={email}, su={subject}, body={body}
+      processedUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=Portfolio Inquiry&body=Hi Akshaj, I came across your portfolio...`;
     }
 
     const baseProfile = {
@@ -28,7 +29,7 @@ const Profiles: React.FC = () => {
       gradient: '',
       description: '',
       stats: { value: '', label: '' },
-      isGmail // Add this flag
+      isGmail
     };
 
     switch (profile.name) {
