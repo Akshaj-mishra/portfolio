@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Code, HardHat, Brain, BookOpenText, GitBranch, Laptop, Database, Brackets, Cloud, Server, Atom, Globe, Lightbulb, Cpu, Terminal, Zap, Layers, Webhook, Settings, Network,FileCode, Braces, Binary, GitCompare,Coffee } from 'lucide-react';
+import { Github, Linkedin, Mail, Code, HardHat, Brain, BookOpenText, GitBranch, Laptop, Database, Brackets, Cloud, Server, Atom, Globe, Lightbulb, Cpu, Terminal, Zap, Layers, Webhook, Settings, Network,FileCode, Braces, Binary, GitCompare,Coffee,Sailboat } from 'lucide-react';
 
 import profilePhotoUrl from './profile.jpg';
 import markdarshan from '../assets/projects/markdarshan.png';
@@ -52,6 +52,9 @@ export const personalData = {
     { name: "Git", category: "Version Control & Tools", logo: GitBranch },
     { name: "GitHub", category: "Version Control & Tools", logo: Github },
     { name: "VS Code", category: "Version Control & Tools", logo: Terminal },
+    { name: "Docker", category: "Version Control & Tools", logo: Sailboat },
+    { name: "Fast API", category: "AI/ML Tools", logo: Network },
+    { name: "DNN", category: "AI/ML Tools", logo: Brain },
   ],
 
   academics: [
@@ -83,7 +86,7 @@ export const personalData = {
       githubLink: "https://github.com/Akshaj-mishra/plantVillage",
       liveLink: "https://imagegrnai.web.app", 
       imageUrl: plant,
-      techStack: ["Deep Learning", "FastAPI", "Gemini API", "React.js", "Firebase", "CNN"],
+      techStack: ["Deep Learning" ,"Docker", "FastAPI", "Gemini API", "React.js", "Firebase", "CNN"],
       points: [
         "Built an end-to-end plant disease classification system using a CNN trained on the PlantVillage dataset, achieving high accuracy in real-time leaf disease prediction.",
         "Developed a FastAPI backend to handle inference, preprocess images, and integrate with Google Gemini API for generating detailed disease explanations and treatment suggestions.",
@@ -115,7 +118,7 @@ export const personalData = {
       githubLink: "https://github.com/Akshaj-mishra/SafeMind",
       liveLink: "#", // if put # then live link option is diabled for that project
       imageUrl: safe_mind,
-      techStack: ["Python", "TensorFlow", "DNN", "FastAPI", "OpenCV", "LangChain"],
+      techStack: ["Python", "TensorFlow","Docker", "DNN", "FastAPI", "OpenCV", "LangChain"],
       points: [
         "AI-powered system for detecting suicidal ideation from text",
         "Uses NLP and machine learning for emotional distress analysis",
@@ -146,7 +149,7 @@ export const personalData = {
   socialLinks: [
     { name: "GitHub", url: "https://github.com/Akshaj-mishra", icon: Github },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/akshaj-mishra-84099a28b", icon: Linkedin },
-    { name: "Gmail", url: "mailto:akshajmishra3@gmail.com", icon: Mail }
+    { name: "Gmail", url: "akshajmishra3@gmail.com", icon: Mail }
   ],
 
   contactEmail: "akshajmishra3@gmail.com",

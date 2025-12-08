@@ -4,14 +4,21 @@ import { ExternalLink, Activity, Mail } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
 const Profiles: React.FC = () => {
-  const { socialLinks } = personalData;
+  const { socialLinks, contactEmail } = personalData;
   const [activeProfile, setActiveProfile] = useState<string | null>(null);
   const [hoveredProfile, setHoveredProfile] = useState<string | null>(null);
 
   const enhancedProfiles = socialLinks.map((profile, index) => {
+    // For Gmail, create a proper mailto URL with subject and body if desired
     let processedUrl = profile.url;
-    if (profile.name === 'Gmail' && !processedUrl.startsWith('mailto:')) {
-      processedUrl = `mailto:${processedUrl}`;
+    let isGmail = false;
+    
+    if (profile.name === 'Gmail') {
+      isGmail = true;
+      // Extract email from the URL (remove mailto: if present)
+      const email = profile.url.replace('mailto:', '');
+      // Create a proper mailto URL with subject and optional body
+      processedUrl = `mailto:${email}?subject=Portfolio Inquiry&body=Hi Akshaj, I came across your portfolio and wanted to connect...`;
     }
 
     const baseProfile = {
@@ -20,7 +27,8 @@ const Profiles: React.FC = () => {
       color: '',
       gradient: '',
       description: '',
-      stats: { value: '', label: '' }
+      stats: { value: '', label: '' },
+      isGmail // Add this flag
     };
 
     switch (profile.name) {
@@ -97,6 +105,14 @@ const Profiles: React.FC = () => {
     }
   };
 
+  // Function to handle Gmail click with better mailto formatting
+  const handleGmailClick = (e: React.MouseEvent, profileUrl: string) => {
+    // For Gmail, we want to open the default mail client
+    // No need to prevent default or stop propagation since we want the browser to handle it
+    console.log('Opening email client with:', profileUrl);
+    // The browser will handle the mailto: link automatically
+  };
+
   return (
     <section id="profiles" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -162,9 +178,9 @@ const Profiles: React.FC = () => {
                         className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-gray-200 dark:group-hover:bg-gray-600"
                       >
                         {isGmail ? (
-                            <Mail className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                          <Mail className="h-4 w-4 text-gray-600 dark:text-gray-300" />
                         ) : (
-                            <ExternalLink className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                          <ExternalLink className="h-4 w-4 text-gray-600 dark:text-gray-300" />
                         )}
                       </motion.div>
                     </div>
@@ -197,11 +213,20 @@ const Profiles: React.FC = () => {
                     <motion.a
                       href={profile.url}
                       target={isGmail ? '_self' : '_blank'}
-                      rel="noopener noreferrer"
+                      rel={isGmail ? '' : 'noopener noreferrer'}
                       className={`flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-white ${profile.color} hover:shadow-lg transition-all duration-300`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        if (isGmail) {
+                          // For Gmail, we don't need to prevent default
+                          // The browser will handle the mailto: link
+                          handleGmailClick(e, profile.url);
+                        } else {
+                          // For other links, prevent event bubbling to parent
+                          e.stopPropagation();
+                        }
+                      }}
                     >
                       <span>{isGmail ? 'Send Email' : 'Visit Profile'}</span>
                       {isGmail ? <Mail className="ml-2 h-4 w-4" /> : <ExternalLink className="ml-2 h-4 w-4" />}
@@ -269,12 +294,25 @@ const Profiles: React.FC = () => {
                             </div>
                           </div>
 
+                          {isGmail && (
+                            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                              <p className="text-sm text-gray-700 dark:text-gray-300">
+                                Clicking "Send Email" will open your default email client with my email pre-filled.
+                              </p>
+                            </div>
+                          )}
+
                           <div className="pt-6">
                             <a
                               href={profile.url}
                               target={isGmail ? '_self' : '_blank'}
-                              rel="noopener noreferrer"
+                              rel={isGmail ? '' : 'noopener noreferrer'}
                               className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${profile.gradient} text-white font-medium rounded-lg hover:shadow-lg transition-shadow`}
+                              onClick={(e) => {
+                                if (!isGmail) {
+                                  e.stopPropagation();
+                                }
+                              }}
                             >
                               {isGmail ? <Mail className="h-5 w-5 mr-2" /> : <ExternalLink className="h-5 w-5 mr-2" />}
                               {isGmail ? 'Send Email' : `Open ${profile.name}`}
