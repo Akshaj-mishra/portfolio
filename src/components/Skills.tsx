@@ -71,6 +71,8 @@ const Skills: React.FC = () => {
 
         {/* Skills Grid */}
         <motion.div
+          // 1. FIX: Add key here. This forces the container to re-render when category changes
+          key={activeCategory} 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -81,7 +83,8 @@ const Skills: React.FC = () => {
             const LogoComponent = skill.logo;
             return (
               <motion.div
-                key={index}
+                // 2. FIX: Use skill.name (unique ID) instead of index
+                key={skill.name} 
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center"
