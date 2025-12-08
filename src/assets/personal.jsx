@@ -22,7 +22,7 @@ export const personalData = {
   name: "Akshaj Mishra",
   title: "Full Stack Developer | AI Enthusiast",
   shortAbout: "Experienced and results-driven Software Developer with a solid foundation in Data Structures and Algorithms (DSA) and expertise in the MERN stack, Java, Python, and C++. I am seeking a challenging role where I can apply my skills in full-stack development, problem-solving, and AI and Machine Learning to drive technical excellence.",
-  profilePhotoUrl , 
+  profilePhotoUrl, 
 
   skills: [
     { name: "C++", category: "Programming Languages", logo: Braces },
@@ -79,28 +79,67 @@ export const personalData = {
   projects: [
     {
       title: "Plantvillage",
-      description: "PlantVillage is an open-access platform designed to help farmers identify crop diseases and improve agricultural productivity using AI-powered tools. It combines research, machine learning, and a vast image database to provide quick, accurate diagnoses of plant health issues. By offering practical, data-driven guidance, PlantVillage supports sustainable farming and helps communities increase food security.",
-      githubLink: "https://github.com/Akshaj-mishra/plantVillage.git",
-      imageUrl: plant ,
-    },
+      description: "AI-powered platform for crop disease identification and agricultural productivity improvement",
+      githubLink: "https://github.com/Akshaj-mishra/plantVillage",
+      liveLink: "https://imagegrnai.web.app", 
+      imageUrl: plant,
+      techStack: ["Deep Learning", "FastAPI", "Gemini API", "React.js", "Firebase", "CNN"],
+      points: [
+        "Built an end-to-end plant disease classification system using a CNN trained on the PlantVillage dataset, achieving high accuracy in real-time leaf disease prediction.",
+        "Developed a FastAPI backend to handle inference, preprocess images, and integrate with Google Gemini API for generating detailed disease explanations and treatment suggestions.",
+        "Implemented a responsive React.js frontend enabling farmers/users to upload images, view predictions, and receive AI-generated insights.",
+        "Designed a modular, production-ready architecture with separate layers for the ML model, API services, and UI.",
+        "Helps communities increase food security through better crop management",
+        "Deployed the system on Firebase Hosting, ensuring seamless CI/CD, scalable backend integration, and fast global access."
+      ]
+    }, 
     {
       title: "MARGDARSHAN",
-      description: "Markdarshan Truck Routing is an intelligent logistics solution that optimizes truck routes for faster, safer, and more cost-efficient transportation. Using real-time data and smart routing algorithms, it helps drivers avoid delays, reduce fuel consumption, and ensure timely deliveries. The platform improves fleet management by offering accurate navigation, live tracking, and optimized route planning tailored for commercial transport.",
-      githubLink: "https://github.com/Akshaj-mishra/MARGDARSHAN.git",
-      imageUrl: markdarshan ,
-
+      description: "Markdarshan Truck Routing is an intelligent logistics solution that optimizes truck routes for faster, safer, and more cost-efficient transportation.",
+      githubLink: "https://github.com/Akshaj-mishra/MARGDARSHAN",
+      liveLink: "#", 
+      imageUrl: markdarshan,
+      techStack: ["Python", "TensorFlow", "React", "FastAPI", "OpenCV", "MongoDB"],
+      points: [
+        "Intelligent route optimization using real-time data",
+        "Reduces fuel consumption and transportation costs",
+        "Live tracking and accurate navigation for commercial transport",
+        "Smart routing algorithms to avoid delays and ensure timely deliveries",
+        "Fleet management optimization for logistics companies",
+        "Tailored specifically for truck and commercial vehicle routing"
+      ]
     },
     {
       title: "SafeMind",
-      description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation. By combining NLP, machine learning, and ethical data processing, the model identifies emotional distress, classifies risk levels, and supports timely human intervention—while ensuring privacy, safety, and responsible AI use.",
-      githubLink: "https://github.com/Akshaj-mishra/SafeMind.git",
-      imageUrl: safe_mind ,
+      description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation.",
+      githubLink: "https://github.com/Akshaj-mishra/SafeMind",
+      liveLink: "#", 
+      imageUrl: safe_mind,
+      techStack: ["Python", "TensorFlow", "React", "FastAPI", "OpenCV", "MongoDB"],
+      points: [
+        "AI-powered system for detecting suicidal ideation from text",
+        "Uses NLP and machine learning for emotional distress analysis",
+        "Ethical data processing with privacy and safety considerations",
+        "Classifies risk levels for timely human intervention",
+        "Analyzes social media messages for early warning signs",
+        "Responsible AI implementation with mental health focus"
+      ]
     },
     {
       title: "Personal Portfolio Website",
       description: "This portfolio showcases my work as a software developer specializing in C++, Java, Python, MERN Stack, AI/ML, and scalable system design. It highlights my skills, academic background, major projects, and professional profiles—all presented through an interactive, modern UI built with React, Tailwind CSS, and Framer Motion.",
-      githubLink: "https://github.com/Akshaj-mishra/portfolio.git",
-      imageUrl: portfolio ,
+      githubLink: "https://github.com/Akshaj-mishra/portfolio",
+      liveLink: "#", // if put # then live link option is diabled for that project
+      imageUrl: portfolio,
+      techStack: ["Python", "TensorFlow", "React", "FastAPI", "OpenCV", "MongoDB"],
+      points: [
+        "Modern, responsive UI built with React and Tailwind CSS",
+        "Interactive animations using Framer Motion library",
+        "Showcases skills, projects, and academic background",
+        "Contact form with email integration",
+        "Dark/light mode toggle functionality",
+        "Optimized for performance and accessibility"
+      ]
     }
   ],
 
@@ -115,69 +154,69 @@ export const personalData = {
   emailJSTemplateId: "template_mb927p9",
   emailJSPublicKey: "JDKhfRDxVWdjtT2Qa",
 
-  certificates : [
-  {
-    id: 1,
-    title: "Artificial Intelligence",
-    issuer: "Infosys",
-    date: "June 2025",
-    imageUrl: Artificial_Intelligence,
-  },
-  {
-    id: 2,
-    title: "Cisco Hackathon",
-    issuer: "Cisco",
-    date: "September 2024",
-    imageUrl: cisco_hackathon,
-  },
-  {
-    id: 3,
-    title: "Google Solutin Hackathon",
-    issuer: "Google",
-    date: "August 2025",
-    imageUrl: google_solutin_hackathon,
-  },
-  {
-    id: 4,
-    title: "Computer Vision",
-    issuer: "Infosys",
-    date: "June 2025",
-    imageUrl: Computer_Vision,
-  },
-  {
-    id: 5,
-    title: "Introduction to Deep Learning",
-    issuer: "Infosys",
-    date: "June  2025",
-    imageUrl: Introduction_to_Deep_Learning,
-  },
-  {
-    id: 6,
-    title: "Introduction to Natural Language Processing",
-    issuer: "Infosys",
-    date: "June 2025",
-    imageUrl: nlp,
-  },
-  {
-    id: 7,
-    title: "Introduction to Data Science",
-    issuer: "Infosys",
-    date: "June 2025",
-    imageUrl: data,
-  },
-  {
-    id: 8,
-    title: "Generative models for developers",
-    issuer: "Infosys",
-    date: "June 2025",
-    imageUrl: gen,
-  },
-  {
-  id: 9,
-    title: "NeuCode Challenge",
-    issuer: "NeuCode",
-    date: "June 2025",
-    imageUrl: nue,
-  }
+  certificates: [
+    {
+      id: 1,
+      title: "Artificial Intelligence",
+      issuer: "Infosys",
+      date: "June 2025",
+      imageUrl: Artificial_Intelligence,
+    },
+    {
+      id: 2,
+      title: "Cisco Hackathon",
+      issuer: "Cisco",
+      date: "September 2024",
+      imageUrl: cisco_hackathon,
+    },
+    {
+      id: 3,
+      title: "Google Solutin Hackathon",
+      issuer: "Google",
+      date: "August 2025",
+      imageUrl: google_solutin_hackathon,
+    },
+    {
+      id: 4,
+      title: "Computer Vision",
+      issuer: "Infosys",
+      date: "June 2025",
+      imageUrl: Computer_Vision,
+    },
+    {
+      id: 5,
+      title: "Introduction to Deep Learning",
+      issuer: "Infosys",
+      date: "June 2025",
+      imageUrl: Introduction_to_Deep_Learning,
+    },
+    {
+      id: 6,
+      title: "Introduction to Natural Language Processing",
+      issuer: "Infosys",
+      date: "June 2025",
+      imageUrl: nlp,
+    },
+    {
+      id: 7,
+      title: "Introduction to Data Science",
+      issuer: "Infosys",
+      date: "June 2025",
+      imageUrl: data,
+    },
+    {
+      id: 8,
+      title: "Generative models for developers",
+      issuer: "Infosys",
+      date: "June 2025",
+      imageUrl: gen,
+    },
+    {
+      id: 9,
+      title: "NeuCode Challenge",
+      issuer: "NeuCode",
+      date: "June 2025",
+      imageUrl: nue,
+    }
   ]
 };

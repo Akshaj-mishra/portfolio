@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
               variants={itemVariants}
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4"
             >
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="pb-4 block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {name.split(' ')[0]}
               </span>
               <span className="block text-gray-900 dark:text-white">

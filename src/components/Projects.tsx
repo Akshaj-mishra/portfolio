@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Eye, Code, Brain, Server, Database } from 'lucide-react';
+import { Github, ExternalLink, Eye, Code, Brain, Server, Database, CheckCircle } from 'lucide-react';
 import { personalData } from '../assets/personal';
 
 const Projects: React.FC = () => {
   const { projects } = personalData;
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
-
   const getProjectIcon = (title: string) => {
     if (title.toLowerCase().includes('plant')) return <Brain className="h-6 w-6" />;
     if (title.toLowerCase().includes('safe')) return <Brain className="h-6 w-6" />;
     if (title.toLowerCase().includes('portfolio')) return <Code className="h-6 w-6" />;
     return <Server className="h-6 w-6" />;
+  };
+
+  // Get tech badges for a project
+  const getTechBadges = (project: typeof projects[0]) => {
+    if (project.techStack) {
+      return project.techStack.slice(0, 3); // Show only first 3 tech badges
+    }
+    return [];
   };
 
   return (
@@ -66,17 +73,69 @@ const Projects: React.FC = () => {
                   {project.description}
                 </p>
 
+                {/* Tech Stack Badges */}
+                {project.techStack && project.techStack.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {getTechBadges(project).map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.techStack.length > 3 && (
+                      <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-medium rounded-full">
+                        +{project.techStack.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Project Points Preview (show first 2 points) */}
+                <div className="mb-4">
+                  {project.points && project.points.slice(0, 2).map((point, idx) => (
+                    <div key={idx} className="flex items-start mb-2">
+                      <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
+                        {point}
+                      </span>
+                    </div>
+                  ))}
+                  {project.points && project.points.length > 2 && (
+                    <div className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                      +{project.points.length - 2} more features
+                    </div>
+                  )}
+                </div>
+
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between">
-                  <a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-blue-600 dark:text-blue-400 hover:underline"
-                  >
-                    <Github className="h-5 w-5 mr-2" />
-                    View Code
-                  </a>
+                  <div className="flex items-center space-x-4">
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      <Github className="h-5 w-5 mr-2" />
+                      View Code
+                    </a>
+                    
+                    {/* Live Link Button - Only show if not '#' */}
+                    {project.liveLink && project.liveLink !== '#' && (
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-green-600 dark:text-green-400 hover:underline"
+                      >
+                        <ExternalLink className="h-5 w-5 mr-2" />
+                        Live Demo
+                      </a>
+                    )}
+                  </div>
+                  
                   <button
                     onClick={() => setSelectedProject(project)}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -113,16 +172,68 @@ const Projects: React.FC = () => {
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
                     {selectedProject.description}
                   </p>
-                  <div className="flex space-x-4">
+
+                  {/* Tech Stack in Modal */}
+                  {selectedProject.techStack && selectedProject.techStack.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                        Technologies Used:
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.techStack.map((tech, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Detailed Project Points */}
+                  <div className="mb-6">
+                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                      Key Features & Details:
+                    </h4>
+                    <div className="space-y-3">
+                      {selectedProject.points && selectedProject.points.map((point, idx) => (
+                        <div key={idx} className="flex items-start">
+                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                          <span className="text-gray-700 dark:text-gray-300">
+                            {point}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-wrap gap-4">
                     <a
                       href={selectedProject.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
                     >
-                      <Github className="h-5 w-5 inline mr-2" />
+                      <Github className="h-5 w-5 mr-2" />
                       View on GitHub
                     </a>
+                    
+                    {/* Conditional Live Link Button */}
+                    {selectedProject.liveLink && selectedProject.liveLink !== '#' && (
+                      <a
+                        href={selectedProject.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center"
+                      >
+                        <ExternalLink className="h-5 w-5 mr-2" />
+                        Live Demo
+                      </a>
+                    )}
+                    
                     <button
                       onClick={() => setSelectedProject(null)}
                       className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
