@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, CheckCircle } from 'lucide-react';
+import { Mail, MapPinned, CheckCircle } from 'lucide-react';
 import { personalData } from '../assets/personal';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
@@ -70,9 +70,9 @@ const Contact: React.FC = () => {
     },
     {
       id: 'location',
-      icon: <Phone className="h-6 w-6" />,
-      title: 'Phone',
-      value: '7987826637', // Ensure this is a string
+      icon: <MapPinned className="h-6 w-6" />,
+      title: 'Location',
+      value: 'Indoore [Mp]', 
       link: 'tel:7987826637',
       color: 'from-orange-500 to-red-500'
     }
