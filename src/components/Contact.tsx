@@ -73,7 +73,6 @@ const Contact: React.FC = () => {
       icon: <MapPinned className="h-6 w-6" />,
       title: 'Location',
       value: 'Indoore [Mp]', 
-      link: 'tel:7987826637',
       color: 'from-orange-500 to-red-500'
     }
   ];
