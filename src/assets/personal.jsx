@@ -14,7 +14,7 @@ import nlp from '../assets/certificates/Introduction to Natural Language Process
 import data from '../assets/certificates/Introduction to Data Science.jpg';
 import gen from '../assets/certificates/Generative models for developers.jpg';
 import nue from '../assets/certificates/neu_ai_page.jpg';
-
+import aml from '../assets/certificates/image.png'
 
 
 
@@ -113,10 +113,10 @@ export const personalData = {
       ]
     },
     {
-      title: "SafeMind",
+      title: "SafeMind(Upcoming)",
       description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation.",
       githubLink: "https://github.com/Akshaj-mishra/SafeMind",
-      liveLink: "#", // if put # then live link option is diabled for that project
+      liveLink: "#", 
       imageUrl: safe_mind,
       techStack: ["Python", "TensorFlow","Docker", "DNN", "FastAPI", "OpenCV", "LangChain"],
       points: [
@@ -220,6 +220,13 @@ export const personalData = {
       issuer: "NeuCode",
       date: "June 2025",
       imageUrl: nue,
+    },
+    {
+      id: 10,
+      title: "Applied Machine Learning in Python",
+      issuer: "University of Michigan",
+      date: "Dec 2025",
+      imageUrl: aml,
     }
   ]
 };
