@@ -15,7 +15,7 @@ import data from '../assets/certificates/Introduction to Data Science.jpg';
 import gen from '../assets/certificates/Generative models for developers.jpg';
 import nue from '../assets/certificates/neu_ai_page.jpg';
 import aml from '../assets/certificates/image.png'
-
+import intern from '../assets/certificates/intern.png'
 
 
 export const personalData = {
@@ -226,6 +226,13 @@ export const personalData = {
       issuer: "University of Michigan",
       date: "Dec 2025",
       imageUrl: aml,
+    },
+    {
+      id: 11,
+      title: "Internship at Infosys",
+      issuer: "Infosys",
+      date: "June 2026",
+      imageUrl: intern,
     }
   ]
 };
