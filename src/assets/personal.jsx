@@ -113,19 +113,18 @@ export const personalData = {
       ]
     },
     {
-      title: "SafeMind(Upcoming)",
-      description: "Suicide Thought Prediction Model is an AI-powered system designed to analyze social media messages and detect early signs of suicidal ideation.",
-      githubLink: "https://github.com/Akshaj-mishra/SafeMind",
+      title: "WebScanPro",
+      description: "WebScanPro, an automated security tool detecting OWASP Top 10 vulnerabilities (SQLi, XSS, IDOR)",
+      githubLink: "https://github.com/Akshaj-mishra/WebScanPro",
       liveLink: "#", 
       imageUrl: safe_mind,
-      techStack: ["Python", "TensorFlow","Docker", "DNN", "FastAPI", "OpenCV", "LangChain"],
+      techStack: ["Python", "TensorFlow","Docker", "LLM", "FastAPI", "MERN", "LangChain"],
       points: [
-        "AI-powered system for detecting suicidal ideation from text",
-        "Uses NLP and machine learning for emotional distress analysis",
-        "Ethical data processing with privacy and safety considerations",
-        "Classifies risk levels for timely human intervention",
-        "Analyzes social media messages for early warning signs",
-        "Responsible AI implementation with mental health focus"
+        "Built a full-stack cybersecurity platform using React TypeScript, FastAPI, and Firebase for scalable web-based analysis.",
+        "Developed automated crawlers with BeautifulSoup and Selenium to extract interactive metadata and simulate attack surfaces.",
+        "Integrated Gemini AI to identify scan anomalies and generate structured PDF vulnerability reports with severity classifications.",
+        "Validated the system through penetration testing on DVWA, OWASP Juice Shop, and bWAPP environments.",
+        "Responsible AI implementation with devlopment security focus"
       ]
     },
     {
