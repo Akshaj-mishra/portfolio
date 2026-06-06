@@ -100,7 +100,7 @@ export const personalData = {
       title: "MARGDARSHAN",
       description: "Markdarshan Truck Routing is an intelligent logistics solution that optimizes truck routes for faster, safer, and more cost-efficient transportation.",
       githubLink: "https://github.com/Akshaj-mishra/MARGDARSHAN",
-      liveLink: "#", 
+      liveLink: "https://markdershan-frontend.vercel.app/", 
       imageUrl: markdarshan,
       techStack: ["Fast API", "Next", "Type Script", "MongoDB", "Xg Boast Model", "Google Maps API" , "Express"],
       points: [
