@@ -14,9 +14,8 @@ import nlp from '../assets/certificates/Introduction to Natural Language Process
 import data from '../assets/certificates/Introduction to Data Science.jpg';
 import gen from '../assets/certificates/Generative models for developers.jpg';
 import nue from '../assets/certificates/neu_ai_page.jpg';
-import aml from '../assets/certificates/image.png'
-import intern from '../assets/certificates/intern.png'
-
+import aml from '../assets/certificates/image.png';
+import intern from '../assets/certificates/intern.png';
 
 export const personalData = {
   name: "Akshaj Mishra",
